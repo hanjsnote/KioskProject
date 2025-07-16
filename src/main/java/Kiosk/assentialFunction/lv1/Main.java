@@ -26,7 +26,7 @@ public class Main {
                 return;
             }
             //메뉴 선택 출력
-            if (selectMenu >= 0 && selectMenu < shakeShackMenu.length) {
+            if (selectMenu > 0 && selectMenu <= shakeShackMenu.length) {
                 System.out.println("선택한 메뉴는: " + shakeShackMenu[selectMenu - 1]);
             } else {
                 System.out.println("없는 메뉴입니다.");
