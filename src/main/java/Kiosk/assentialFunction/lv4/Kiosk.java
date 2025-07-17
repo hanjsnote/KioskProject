@@ -1,9 +1,7 @@
-package Kiosk.assentialFunction.lv3;
+package Kiosk.assentialFunction.lv4;
 import java.util.*;
 
-class Kiosk extends MenuItem{
-
-    List<MenuItem> menuItems = new ArrayList<>();
+class Kiosk extends Menu {
 
     //생성자
     public Kiosk() {}

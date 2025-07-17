@@ -1,6 +1,4 @@
-package Kiosk.assentialFunction.lv3;
-
-import java.util.*;
+package Kiosk.assentialFunction.lv4;
 
 class MenuItem {
     //필드 인스턴스 변수
@@ -12,9 +10,5 @@ class MenuItem {
     public String toString(){
         return String.format("%-15s | %-3.1f | %-30s", name, price, comment);
     }
-
-
-
-
 
 }
