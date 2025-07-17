@@ -2,7 +2,7 @@ package Kiosk.assentialFunction.lv2;
 
 import java.util.*;
 
-public class MenuItem {
+class MenuItem {
     //필드 인스턴스 변수
     String name;
     double price;
