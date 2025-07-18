@@ -12,7 +12,7 @@ public class Main {
 
         menu.printMenu();
 
-        Kiosk kiosk = new Kiosk();
+        Kiosk kiosk = new Kiosk(menu);
         kiosk.start();
 
 

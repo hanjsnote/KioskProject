@@ -3,7 +3,11 @@ import java.util.*;
 
 class Kiosk {
 
-    Menu menus = new Menu();
+    Menu menus;
+
+    Kiosk(Menu menus){
+        this.menus = menus;
+    };
 
     //입력과 반복문 로직 start함수
     public void start(){
