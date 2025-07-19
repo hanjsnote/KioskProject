@@ -9,6 +9,15 @@ class Kiosk {
         this.menu = menu;
     };
 
+//    void detailedMenu(String category) {
+//        List<MenuItem> filterItems = new ArrayList<>();
+//        for (MenuItem item : menu.menuItems) {
+//            if (item.category.equals(category)) {
+//                filterItems.add(item);
+//            }
+//        }
+//    }
+
     //입력과 반복문 로직 start함수
     public void start(){
         Scanner sc = new Scanner(System.in);
@@ -47,15 +56,28 @@ class Kiosk {
             while (true) {  //상세 메뉴
                 System.out.print("메뉴를 선택하세요: ");
                 try {
-                int detailMenu = sc.nextInt();
+                    int detailMenu = sc.nextInt();
                     if (detailMenu == 0) {  //상세 메뉴에서 메인 메뉴로 뒤로가기
                         break;
                     }
-                    if (detailMenu > 0 && detailMenu <= menu.menuItems.size()) {
-                        System.out.println("선택한 메뉴는: " + menu.menuItems.get(detailMenu - 1));
-                    } else {
-                        System.out.println("없는 메뉴입니다.");
+
+                    List<MenuItem> filterList = new ArrayList<>();
+                    for (MenuItem item : menu.menuItems) {
+                        if (item.category.equals("2. Drinks")) {
+                            filterList.add(item);
+                            for(int i = 0; i < filterList.size(); i++){
+                                System.out.println("선택한 메뉴는: " + filterList.get(i));
+                            }
+                        }
                     }
+
+
+//                    if (detailMenu > 0 && detailMenu <= menu.menuItems.size()) {
+//                        System.out.println("선택한 메뉴는: " + menu.menuItems.get(detailMenu - 1));
+//                    } else {
+//                        System.out.println("없는 메뉴입니다.");
+//                    }
+
                 } catch (InputMismatchException e) {
                     System.out.println("숫자만 입력해주세요.");
                     sc.nextLine();
