@@ -9,14 +9,16 @@ class Kiosk {
         this.menu = menu;
     };
 
-//    void detailedMenu(String category) {
-//        List<MenuItem> filterItems = new ArrayList<>();
-//        for (MenuItem item : menu.menuItems) {
-//            if (item.category.equals(category)) {
-//                filterItems.add(item);
-//            }
-//        }
-//    }
+    //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
+    List<MenuItem> filteredItem(String category) {
+        List<MenuItem> filterList = new ArrayList<>();
+        for (MenuItem item : menu.menuItems) {
+            if (item.category.equals(category)) {
+                filterList.add(item);
+            }
+        }
+        return filterList;
+    }
 
     //입력과 반복문 로직 start함수
     public void start(){
@@ -26,60 +28,49 @@ class Kiosk {
             System.out.println("[ MAIN MENU ]");
             System.out.println("1. Burgers\n2. Drinks\n3. Desserts\n0. 종료");
             System.out.print("메뉴를 선택하세요: ");
-            try { // 문자가 들어올 시 예외처리
+
+            List<MenuItem> filtered = new ArrayList<>(); //start 함수에서 사용할 List
+
+            try {
                 int selectMenu = sc.nextInt();
-                if (selectMenu == 0) {  //메인 메뉴에서 종료
+
+                if (selectMenu == 1) {              //사용자 입력값이 1이라면
+                    menu.burgers();                 //Menu 클래스의 bergers() 메서드를 호출하여 해당 메뉴 목록을 출력하고
+                    filtered = filteredItem("1. Burgers"); // 메뉴 항목 중 "1. Burgers" 카테고리에 해당하는 항목만 필터링해서 filtered 리스트에 담는다.
+                } else if (selectMenu == 2) {
+                    menu.drink();
+                    filtered = filteredItem("2. Drinks");
+                } else if (selectMenu == 3) {
+                    menu.desserts();
+                    filtered = filteredItem("3. Desserts");
+                } else if (selectMenu == 0) {
                     return;
-                }
-                if (selectMenu >= 1 && selectMenu <= 3) {
-                    switch (selectMenu) {
-                        case 1:
-                            menu.burgers();
-                            break;
-                        case 2:
-                            menu.drink();
-                            break;
-                        case 3:
-                            menu.desserts();
-                            break;
-                    }
                 } else {
-                    System.out.println("잘못된 입력입니다.");
+                    System.out.println("잘못 입력하셨습니다.");
                     continue;
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("숫자만 입력해주세요.");
-                sc.nextLine(); //잘못된 입력 버퍼 제거
+            } catch (InputMismatchException e){
+                System.out.println("문자는 입력할 수 없습니다.");
+                sc.nextLine();
                 continue;
             }
 
-            while (true) {  //상세 메뉴
+            //상세 메뉴 선택
+            while (true) {
                 System.out.print("메뉴를 선택하세요: ");
                 try {
                     int detailMenu = sc.nextInt();
-                    if (detailMenu == 0) {  //상세 메뉴에서 메인 메뉴로 뒤로가기
-                        break;
+
+                    if (detailMenu == 0) {
+                        break;    //뒤로 가기
                     }
-
-                    List<MenuItem> filterList = new ArrayList<>();
-                    for (MenuItem item : menu.menuItems) {
-                        if (item.category.equals("2. Drinks")) {
-                            filterList.add(item);
-                            for(int i = 0; i < filterList.size(); i++){
-                                System.out.println("선택한 메뉴는: " + filterList.get(i));
-                            }
-                        }
+                    if (detailMenu >= 1 && detailMenu <= filtered.size()) {
+                        System.out.println("선택한 메뉴는: " + filtered.get(detailMenu - 1));
+                    } else {
+                        System.out.println("잘못 입력하셨습니다.");
                     }
-
-
-//                    if (detailMenu > 0 && detailMenu <= menu.menuItems.size()) {
-//                        System.out.println("선택한 메뉴는: " + menu.menuItems.get(detailMenu - 1));
-//                    } else {
-//                        System.out.println("없는 메뉴입니다.");
-//                    }
-
-                } catch (InputMismatchException e) {
-                    System.out.println("숫자만 입력해주세요.");
+                } catch (InputMismatchException e){
+                    System.out.println("문자는 입력할 수 없습니다.");
                     sc.nextLine();
                 }
             }
