@@ -11,6 +11,7 @@ class Kiosk{
 
         //Iterator로 List에 저장된 요소를 하나씩 꺼내기
         Iterator<MenuItem> a = menuItems.iterator();
+
         while (a.hasNext()){   //hasNest()는 다음요소가 존재하는가? true면 next()를 호출
             System.out.println(a.next());
         }

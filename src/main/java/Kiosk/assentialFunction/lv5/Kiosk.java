@@ -4,7 +4,7 @@ import java.util.*;
 
 class Kiosk {
 
-    Menu menu;
+    private final Menu menu;
 
     Kiosk(Menu menu){
         this.menu = menu;
@@ -13,8 +13,9 @@ class Kiosk {
     //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
     List<MenuItem> filteredItem(String category) {
         List<MenuItem> filterList = new ArrayList<>();
-        for (MenuItem item : menu.menuItems) {
-            if (item.category.equals(category)) {
+
+        for (MenuItem item : menu.getMenuItems()) {
+            if (item.getCategory().equals(category)) {
                 filterList.add(item);
             }
         }

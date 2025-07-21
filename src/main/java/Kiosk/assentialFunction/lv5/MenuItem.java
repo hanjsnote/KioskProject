@@ -2,10 +2,10 @@ package Kiosk.assentialFunction.lv5;
 
 class MenuItem {
     //필드 인스턴스 변수
-    String category;
-    String name;
-    double price;
-    String comment;
+    private final String category;
+    private final String name;
+    private final double price;
+    private final String comment;
 
     //생성자
     public MenuItem(String category, String name, double price, String comment){
@@ -14,6 +14,22 @@ class MenuItem {
         this.price = price;
         this.comment = comment;
     }
+
+    //Getter
+    String getCategory(){
+        return category;
+    }
+    String getName(){
+        return name;
+    }
+    Double getPrice(){
+        return price;
+    }
+    String getComment(){
+        return comment;
+    }
+
+    //Setter
 
     @Override
     public String toString(){

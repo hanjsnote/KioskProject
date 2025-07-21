@@ -5,15 +5,21 @@ import java.util.*;
 class Menu {
 
     String strFormat = "%-15s | %-3.1f | %-50s%n"; //간격 포맷
-    List<MenuItem> menuItems = new ArrayList<>();
+    private List<MenuItem> menuItems = new ArrayList<>();
+
+    //Getter
+    List<MenuItem> getMenuItems(){
+        return menuItems;
+    }
 
     //List에 들어있는 MenuItem을 순차적으로 보여주는 함수
     // 1.Burgers 메뉴 선택시 해당 목록만 출력
     void burgers() {
         System.out.println("[ BURGERS MENU ]");
+
         for (MenuItem berger : menuItems) {
-            if (berger.category.equals("1. Burgers")){
-                System.out.printf(strFormat, berger.name, berger.price, berger.comment);
+            if (berger.getCategory().equals("1. Burgers")){
+                System.out.printf(strFormat, berger.getName(), berger.getPrice(), berger.getComment());
             }
         }
         System.out.println("0. 뒤로가기");
@@ -21,9 +27,10 @@ class Menu {
     // 2.Drink 메뉴 선택시 해당 목록만 출력
     void drink(){
         System.out.println("[ DRINK MENU ]");
+
         for (MenuItem drink : menuItems){
-            if (drink.category.equals("2. Drinks")){
-                System.out.printf(strFormat, drink.name, drink.price, drink.comment);
+            if (drink.getCategory().equals("2. Drinks")){
+                System.out.printf(strFormat, drink.getName(), drink.getPrice(), drink.getComment());
             }
         }
         System.out.println("0. 뒤로가기");
@@ -31,9 +38,10 @@ class Menu {
     // 3.Desserts 메뉴 선택시 해당 목록만 출력
     void desserts(){
         System.out.println("[ DESSERTS MENU ]");
+
         for (MenuItem desserts : menuItems){
-            if (desserts.category.equals("3. Desserts")){
-                System.out.printf(strFormat, desserts.name, desserts.price, desserts.comment);
+            if (desserts.getCategory().equals("3. Desserts")){
+                System.out.printf(strFormat, desserts.getName(), desserts.getPrice(), desserts.getComment());
             }
         }
         System.out.println("0. 뒤로가기");

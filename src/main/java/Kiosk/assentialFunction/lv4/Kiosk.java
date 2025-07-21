@@ -12,6 +12,7 @@ class Kiosk {
     //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
     List<MenuItem> filteredItem(String category) {
         List<MenuItem> filterList = new ArrayList<>();
+
         for (MenuItem item : menu.menuItems) {
             if (item.category.equals(category)) {
                 filterList.add(item);
