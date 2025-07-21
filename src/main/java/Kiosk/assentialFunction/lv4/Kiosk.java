@@ -64,8 +64,8 @@ class Kiosk {
                     if (detailMenu == 0) {
                         break;    //뒤로 가기
                     }
-                    if (detailMenu >= 1 && detailMenu <= filtered.size()) {
-                        System.out.println("선택한 메뉴는: " + filtered.get(detailMenu - 1));
+                    if (detailMenu >= 1 && detailMenu <= filtered.size()) { //입력값이 filtered 리스트의 size() 이내라면
+                        System.out.println("선택한 메뉴: " + filtered.get(detailMenu - 1));
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
                     }
