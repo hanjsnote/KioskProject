@@ -10,21 +10,36 @@ class Kiosk {
         this.menu = menu;
     };
 
-    //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
-    List<MenuItem> filteredItem(String category) {
-        List<MenuItem> filterList = new ArrayList<>();
+    //입력과 반복문 로직 start함수
+    public void start() {
+        Scanner sc = new Scanner(System.in);
 
-        for (MenuItem item : menu.getMenuItems()) {
-            if (item.getCategory().equals(category)) {
-                filterList.add(item);
+        while (true) {
+            System.out.print("1. 관리자 메뉴, 2. 사용자 메뉴: ");
+            int userMode = sc.nextInt();
+            sc.nextLine();
+
+            if (userMode == 1) {
+                while (true) {
+                    System.out.print("관리자 비밀번호를 입력해주세요 (비번: 1111)(또는 뒤로가기 0): ");
+
+                    String pw = sc.nextLine();
+
+                    if (menu.passWord().equals(pw)) {
+                        menu.setMenuItems();
+                    } else if (pw.equals("0")) {
+                        break;
+                    } else {
+                        System.out.println("비밀번호가 틀렸습니다.");
+                    }
+                }
+
+            } else if (userMode == 2) {
+                break;
+            } else {
+                System.out.println("잘못된 입력입니다.");
             }
         }
-        return filterList;
-    }
-
-    //입력과 반복문 로직 start함수
-    public void start(){
-        Scanner sc = new Scanner(System.in);
 
         while (true) {
             System.out.println("[ MAIN MENU ]");
@@ -38,13 +53,13 @@ class Kiosk {
 
                 if (selectMenu == 1) {              //사용자 입력값이 1이라면
                     menu.burgers();                 //Menu 클래스의 bergers() 메서드를 호출하여 해당 메뉴 목록을 출력하고
-                    filtered = filteredItem("1. Burgers"); // 메뉴 항목 중 "1. Burgers" 카테고리에 해당하는 항목만 필터링해서 filtered 리스트에 담는다.
+                    filtered = menu.filteredItem("1. Burgers"); // 메뉴 항목 중 "1. Burgers" 카테고리에 해당하는 항목만 필터링해서 filtered 리스트에 담는다.
                 } else if (selectMenu == 2) {
                     menu.drink();
-                    filtered = filteredItem("2. Drinks");
+                    filtered = menu.filteredItem("2. Drinks");
                 } else if (selectMenu == 3) {
                     menu.desserts();
-                    filtered = filteredItem("3. Desserts");
+                    filtered = menu.filteredItem("3. Desserts");
                 } else if (selectMenu == 0) {
                     return;
                 } else {
