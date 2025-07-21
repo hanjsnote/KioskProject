@@ -1,17 +1,9 @@
 package Kiosk.assentialFunction.lv3;
 import java.util.*;
 
-class Kiosk extends MenuItem{
+class Kiosk{
 
     List<MenuItem> menuItems = new ArrayList<>();
-
-    //생성자
-    public Kiosk() {}
-    public Kiosk(String name, double price, String comment) {
-        this.name = name;
-        this.price = price;
-        this.comment = comment;
-    }
 
     //입력과 반복문 로직 start함수
     public void start(){
@@ -19,6 +11,7 @@ class Kiosk extends MenuItem{
 
         //Iterator로 List에 저장된 요소를 하나씩 꺼내기
         Iterator<MenuItem> a = menuItems.iterator();
+
         while (a.hasNext()){   //hasNest()는 다음요소가 존재하는가? true면 next()를 호출
             System.out.println(a.next());
         }
@@ -45,8 +38,7 @@ class Kiosk extends MenuItem{
     }
 
     //add 메서드
-    public void addItem(String name, double price, String comment){
-        Kiosk Items = new Kiosk(name, price, comment);
-        menuItems.add(Items);
+    public void addItem(MenuItem me){
+        menuItems.add(me);
     }
 }

@@ -32,7 +32,4 @@ class MenuItem {
         MenuItem Items = new MenuItem(name, price, comment);
         menuItems.add(Items);
     }
-
-
-
 }

@@ -1,0 +1,136 @@
+package Kiosk.assentialFunction.lv5;
+
+import java.util.*;
+
+class Menu {
+
+    String strFormat = "%-15s | %-3.1f | %-50s%n"; //간격 포맷
+    private List<MenuItem> menuItems = new ArrayList<>();
+
+    //Getter
+    List<MenuItem> getMenuItems(){
+        return menuItems;
+    }
+
+    Scanner sc = new Scanner(System.in);
+
+    //Setter
+    void setMenuItems(){
+        while (true) {
+            for(int i = 0; i < menuItems.size(); i++){
+                MenuItem menuList = menuItems.get(i);
+                System.out.println("index " + i + ", " + menuList);
+                }
+
+            System.out.print("수정할 인덱스의 번호를 선택하세요 또는 뒤로 가려면 b 입력: ");
+            String modifyIndex = sc.nextLine();
+
+            if(modifyIndex.equals("b")){
+                break;
+            }
+
+            //유효 범위인지 확인
+            if (Integer.parseInt(modifyIndex) >= 0 && Integer.parseInt(modifyIndex) < menuItems.size()) {
+                MenuItem selectedItem = menuItems.get(Integer.parseInt(modifyIndex));
+
+                System.out.print("선택하신 메뉴는: " + selectedItem + "입니다 수정하시겠습니까? (y/n) 또는 삭제는 x: ");
+                char ch = sc.next().charAt(0);
+
+                if (ch == 'y') {
+                    sc.nextLine();
+                    System.out.print(selectedItem.getName() + "의 name을 재설정 해주세요(예: 2. SmokeShack -> 2. EggBurger): ");
+                    String modifyName = sc.nextLine();
+                    selectedItem.setName(modifyName);
+
+
+                    System.out.print("price를 재설정 해주세요 현재 price: " + selectedItem.getPrice() + " : ");
+                    double modifyPrice = sc.nextDouble();
+                    selectedItem.setPrice(modifyPrice);
+
+                    sc.nextLine();
+
+                    System.out.print("comment를 재설정 해주세요 현재 comment: " + selectedItem.getComment() + " : ");
+                    String modifyComment = sc.nextLine();
+                    selectedItem.setComment(modifyComment);
+
+                    System.out.println("수정 완료!");
+
+                } else if (ch == 'n') {
+                    break;
+                }
+
+
+            } else {
+                System.out.println("잘못된 인덱스 번호입니다.");
+            }
+        }
+    }
+
+    //List에 들어있는 MenuItem을 순차적으로 보여주는 함수
+    // 1.Burgers 메뉴 선택시 해당 목록만 출력
+    void burgers() {
+        System.out.println("[ BURGERS MENU ]");
+
+        for (MenuItem berger : menuItems) {
+            if (berger.getCategory().equals("1. Burgers")){
+                System.out.printf(strFormat, berger.getName(), berger.getPrice(), berger.getComment());
+            }
+        }
+        System.out.println("0. 뒤로가기");
+    }
+
+    // 2.Drink 메뉴 선택시 해당 목록만 출력
+    void drink(){
+        System.out.println("[ DRINK MENU ]");
+
+        for (MenuItem drink : menuItems){
+            if (drink.getCategory().equals("2. Drinks")){
+                System.out.printf(strFormat, drink.getName(), drink.getPrice(), drink.getComment());
+            }
+        }
+        System.out.println("0. 뒤로가기");
+    }
+
+    // 3.Desserts 메뉴 선택시 해당 목록만 출력
+    void desserts(){
+        System.out.println("[ DESSERTS MENU ]");
+
+        for (MenuItem desserts : menuItems){
+            if (desserts.getCategory().equals("3. Desserts")){
+                System.out.printf(strFormat, desserts.getName(), desserts.getPrice(), desserts.getComment());
+            }
+        }
+        System.out.println("0. 뒤로가기");
+    }
+
+    //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
+    List<MenuItem> filteredItem(String category) {
+        List<MenuItem> filterList = new ArrayList<>();
+
+        for (MenuItem item : getMenuItems()) {
+            if (item.getCategory().equals(category)) {
+                filterList.add(item);
+            }
+        }
+        return filterList;
+    }
+
+    //눈가리기용 암호화..
+    String passWord (){
+        StringBuilder sb = new StringBuilder();
+        int[] code = {49, 49, 49, 49};
+        for(int c : code){
+            sb.append((char)c);
+        }
+        return sb.toString();
+    }
+
+    //기본 메뉴 add 메서드
+    public void addItem(MenuItem me){
+        menuItems.add(me);
+    }
+
+    public void addName(MenuItem name){
+        menuItems.add(name);
+    }
+}
