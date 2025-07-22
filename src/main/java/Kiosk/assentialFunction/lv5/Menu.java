@@ -17,51 +17,65 @@ class Menu {
     //Setter
     void setMenuItems(){
         while (true) {
-            for(int i = 0; i < menuItems.size(); i++){
+            System.out.println("번호  , Category |       Name      |Price|            Comment");
+            for(int i = 0; i < menuItems.size(); i++){  //현재 menuItems 리스트의 목록을 보여줌
                 MenuItem menuList = menuItems.get(i);
-                System.out.println("index " + i + ", " + menuList);
+                System.out.println("번호 " + (i + 1) + ", " + menuList);
                 }
 
-            System.out.print("수정할 인덱스의 번호를 선택하세요 또는 뒤로 가려면 b 입력: ");
-            String modifyIndex = sc.nextLine();
+//            System.out.print("메뉴를 추가하시겠습니까? 또는 수정하시겠습니까?(추가 y, 수정 m, 뒤로가기 0: ");
+//            char addCh = sc.next().charAt(0);
+//
+//            if(addCh == 'y'){
+//                System.out.print("카테고리를 설정해주세요 애) Burgers, Drinks, Desserts: ");
+//
+//            }
 
-            if(modifyIndex.equals("b")){
+            System.out.print("수정할 번호를 선택하세요 또는 뒤로 가려면 0 입력: ");
+            int modifyMenuNum = sc.nextInt();
+
+            if(modifyMenuNum == 0){ //b를 입력하면 뒤로가기
                 break;
             }
 
-            //유효 범위인지 확인
-            if (Integer.parseInt(modifyIndex) >= 0 && Integer.parseInt(modifyIndex) < menuItems.size()) {
-                MenuItem selectedItem = menuItems.get(Integer.parseInt(modifyIndex));
+            //입력값이 리스트 인덱스의 유효 범위인지 확인
+            if (modifyMenuNum >= 1 && modifyMenuNum <= menuItems.size()) {
+                MenuItem selectedItem = menuItems.get(modifyMenuNum - 1);
 
                 System.out.print("선택하신 메뉴는: " + selectedItem + "입니다 수정하시겠습니까? (y/n) 또는 삭제는 x: ");
                 char ch = sc.next().charAt(0);
 
                 if (ch == 'y') {
                     sc.nextLine();
+
+                    //name 수정
                     System.out.print(selectedItem.getName() + "의 name을 재설정 해주세요(예: 2. SmokeShack -> 2. EggBurger): ");
                     String modifyName = sc.nextLine();
                     selectedItem.setName(modifyName);
 
-
+                    //price 수정
                     System.out.print("price를 재설정 해주세요 현재 price: " + selectedItem.getPrice() + " : ");
                     double modifyPrice = sc.nextDouble();
                     selectedItem.setPrice(modifyPrice);
 
                     sc.nextLine();
 
+                    //comment 수정
                     System.out.print("comment를 재설정 해주세요 현재 comment: " + selectedItem.getComment() + " : ");
                     String modifyComment = sc.nextLine();
                     selectedItem.setComment(modifyComment);
 
                     System.out.println("수정 완료!");
 
-                } else if (ch == 'n') {
+                } else if (ch == 'n') { //'n' 입력시 뒤로가기
                     break;
+                } else if (ch == 'x') { //'x' 입력시 해당 아이템 삭제
+                    removeItem(modifyMenuNum);
+                } else {
+                    System.out.println("잘못 입력하셨습니다.");
                 }
-
-
             } else {
-                System.out.println("잘못된 인덱스 번호입니다.");
+                System.out.println("잘못된 번호입니다.");
             }
         }
     }
@@ -115,7 +129,7 @@ class Menu {
         return filterList;
     }
 
-    //눈가리기용 암호화..
+    //눈가림용 암호화..
     String passWord (){
         StringBuilder sb = new StringBuilder();
         int[] code = {49, 49, 49, 49};
@@ -130,7 +144,9 @@ class Menu {
         menuItems.add(me);
     }
 
-    public void addName(MenuItem name){
-        menuItems.add(name);
+    //삭제 메서드
+    public void removeItem(int modifyIndex){
+        menuItems.remove(modifyIndex - 1);
+        System.out.println("삭제되었습니다.");
     }
 }

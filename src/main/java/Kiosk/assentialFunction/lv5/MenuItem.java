@@ -31,6 +31,9 @@ class MenuItem {
     }
 
     //Setter
+    void setCategory(String Category){
+        this.category = category;
+    }
     void setName(String name){
         this.name = name;
     }
@@ -43,7 +46,7 @@ class MenuItem {
 
     @Override
     public String toString(){
-        return String.format("%-12s | %-3.1f | %-50s", name, price, comment);
+        return String.format("%-8s | %-15s | %-3.1f | %-50s", category, name, price, comment);
     }
 
 }
