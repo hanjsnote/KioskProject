@@ -31,9 +31,6 @@ class MenuItem {
     }
 
     //Setter
-    void setCategory(String Category){
-        this.category = category;
-    }
     void setName(String name){
         this.name = name;
     }
