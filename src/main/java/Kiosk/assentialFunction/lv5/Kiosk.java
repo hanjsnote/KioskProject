@@ -16,32 +16,37 @@ class Kiosk {
 
         while (true) {
             System.out.print("1. 관리자 메뉴, 2. 사용자 메뉴: ");
-            int userMode = sc.nextInt();
-            sc.nextLine();
+            try {
+                int userMode = sc.nextInt();
+                sc.nextLine();
 
-            if (userMode == 1) {
-                while (true) {
-                    System.out.print("관리자 비밀번호를 입력해주세요 (비번: 1111)(또는 뒤로가기 0): ");
+                if (userMode == 1) {
+                    while (true) {
+                        System.out.print("관리자 비밀번호를 입력해주세요 (비번: 1111)(또는 뒤로가기 0): ");
 
-                    String pw = sc.nextLine();
+                        String pw = sc.nextLine();
 
-                    if (menu.passWord().equals(pw)) {
-                        menu.setMenuItems();
-                    } else if (pw.equals("0")) {
-                        break;
-                    } else {
-                        System.out.println("비밀번호가 틀렸습니다.");
+                        if (menu.passWord().equals(pw)) {
+                            menu.setMenuItems();
+                        } else if (pw.equals("0")) {
+                            break;
+                        } else {
+                            System.out.println("비밀번호가 틀렸습니다.");
+                        }
                     }
-                }
 
-            } else if (userMode == 2) {
-                break;
-            } else {
-                System.out.println("잘못된 입력입니다.");
+                } else if (userMode == 2) {
+                    break;
+                } else {
+                    System.out.println("잘못된 입력입니다.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("1 또는 2만 입력해주세요");
+                sc.nextLine();
             }
         }
 
-        while (true) {
+            while (true) {
             System.out.println("[ MAIN MENU ]");
             System.out.println("1. Burgers\n2. Drinks\n3. Desserts\n0. 종료");
             System.out.print("메뉴를 선택하세요: ");
@@ -53,13 +58,13 @@ class Kiosk {
 
                 if (selectMenu == 1) {              //사용자 입력값이 1이라면
                     menu.burgers();                 //Menu 클래스의 bergers() 메서드를 호출하여 해당 메뉴 목록을 출력하고
-                    filtered = menu.filteredItem("1. Burgers"); // 메뉴 항목 중 "1. Burgers" 카테고리에 해당하는 항목만 필터링해서 filtered 리스트에 담는다.
+                    filtered = menu.filteredItem("Burgers"); // 메뉴 항목 중 "1. Burgers" 카테고리에 해당하는 항목만 필터링해서 filtered 리스트에 담는다.
                 } else if (selectMenu == 2) {
                     menu.drink();
-                    filtered = menu.filteredItem("2. Drinks");
+                    filtered = menu.filteredItem("Drinks");
                 } else if (selectMenu == 3) {
                     menu.desserts();
-                    filtered = menu.filteredItem("3. Desserts");
+                    filtered = menu.filteredItem("Desserts");
                 } else if (selectMenu == 0) {
                     return;
                 } else {

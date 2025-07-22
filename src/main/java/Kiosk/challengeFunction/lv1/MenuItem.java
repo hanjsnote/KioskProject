@@ -1,4 +1,4 @@
-package Kiosk.assentialFunction.lv5;
+package Kiosk.challengeFunction.lv1;
 
 class MenuItem {
     //필드 인스턴스 변수
@@ -28,7 +28,6 @@ class MenuItem {
     String getComment(){
         return comment;
     }
-
 
     //Setter
     void setName(String name){
