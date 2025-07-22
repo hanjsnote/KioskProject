@@ -46,7 +46,7 @@ class Menu {
                 System.out.print("comment를 입력해주세요 예) 맛있는 에그 버거: ");
                 String commentInput = sc.nextLine();
 
-                //MenuItem 객체 생성후 추가
+                //MenuItem 객체 생성후 addItem 호출하여 리스트에 메뉴 추가
                 MenuItem newItem = new MenuItem(categoryInput, nameInput, priceInput, commentInput);
                 addItem(newItem);
                 System.out.println("메뉴가 추가되었습니다.");

@@ -29,7 +29,6 @@ class MenuItem {
         return comment;
     }
 
-
     //Setter
     void setName(String name){
         this.name = name;

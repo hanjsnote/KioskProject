@@ -1,10 +1,13 @@
 package Kiosk.challengeFunction.lv1;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.*;
 
 class Kiosk {
 
     private final Menu menu;
+    Cart cart = new Cart();
 
     Kiosk(Menu menu){
         this.menu = menu;
@@ -20,22 +23,22 @@ class Kiosk {
                 int userMode = sc.nextInt();
                 sc.nextLine();
 
-                if (userMode == 1) {
+                if (userMode == 1) {    //관리자 메뉴
                     while (true) {
                         System.out.print("관리자 비밀번호를 입력해주세요 (비번: 1111)(또는 뒤로가기 0): ");
 
                         String pw = sc.nextLine();
 
-                        if (menu.passWord().equals(pw)) {
-                            menu.setMenuItems();
-                        } else if (pw.equals("0")) {
+                        if (menu.passWord().equals(pw)) { //passWord 메서드에 정의된 비밀번호가 입력값과 같으면
+                            menu.setMenuItems();          //수정기능 메서드 호출
+                        } else if (pw.equals("0")) {      //뒤로 가기
                             break;
                         } else {
                             System.out.println("비밀번호가 틀렸습니다.");
                         }
                     }
 
-                } else if (userMode == 2) {
+                } else if (userMode == 2) { //사용자 메뉴로 넘어감
                     break;
                 } else {
                     System.out.println("잘못된 입력입니다.");
@@ -45,15 +48,14 @@ class Kiosk {
                 sc.nextLine();
             }
         }
-
-            while (true) {
+            while (true) {  //사용자 메뉴
             System.out.println("[ MAIN MENU ]");
             System.out.println("1. Burgers\n2. Drinks\n3. Desserts\n0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
             List<MenuItem> filtered = new ArrayList<>(); //start 함수에서 사용할 List
 
-            try {
+            try {   //문자가 들어오면 예외 처리
                 int selectMenu = sc.nextInt();
 
                 if (selectMenu == 1) {              //사용자 입력값이 1이라면
@@ -65,7 +67,7 @@ class Kiosk {
                 } else if (selectMenu == 3) {
                     menu.desserts();
                     filtered = menu.filteredItem("Desserts");
-                } else if (selectMenu == 0) {
+                } else if (selectMenu == 0) {   //종료
                     return;
                 } else {
                     System.out.println("잘못 입력하셨습니다.");
@@ -88,6 +90,25 @@ class Kiosk {
                     }
                     if (detailMenu >= 1 && detailMenu <= filtered.size()) { //입력값이 filtered 리스트의 size() 이내라면
                         System.out.println("선택한 메뉴: " + filtered.get(detailMenu - 1));
+
+                        //장바구니 추가
+                        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                        System.out.println("1. 확인 \t\t 2. 취소");
+                        int inputCart = sc.nextInt();
+
+                        if(1 == inputCart){
+                            cart.addCart(filtered.get(detailMenu - 1));     //1. 확인하면 cart 리스트(장바구니)에 추가
+                            System.out.println(filtered.get(detailMenu - 1).getName() + " 이 장바구니에 추가되었습니다.");
+                            
+
+                        } else if (2 == inputCart){
+                            break;
+                        } else {
+                            System.out.println("잘못 입력하셨습니다.");
+                        }
+
+
+
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
                     }
