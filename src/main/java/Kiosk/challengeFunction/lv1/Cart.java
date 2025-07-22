@@ -10,8 +10,12 @@ public class Cart {
         return cart;
     }
 
-    void addCart(MenuItem menuItem){
+    void addCart(MenuItem menuItem){  //장바구니에 메뉴 담기
         cart.add(menuItem);
+    }
+
+    void removeCart(){  //장바구니 비우기
+        cart.clear();
     }
 
 
