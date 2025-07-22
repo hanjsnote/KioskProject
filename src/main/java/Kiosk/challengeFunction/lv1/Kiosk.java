@@ -48,7 +48,7 @@ class Kiosk {
                 sc.nextLine();
             }
         }
-            while (true) {  //사용자 메뉴
+        while (true) {  //사용자 메뉴
             System.out.println("[ MAIN MENU ]");
             System.out.println("1. Burgers\n2. Drinks\n3. Desserts\n0. 종료");
             System.out.print("메뉴를 선택하세요: ");
@@ -80,43 +80,76 @@ class Kiosk {
             }
 
             //상세 메뉴 선택
-            while (true) {
-                System.out.print("메뉴를 선택하세요: ");
-                try {
-                    int detailMenu = sc.nextInt();
+            System.out.print("메뉴를 선택하세요: ");
+            try {
+                int detailMenu = sc.nextInt();
 
-                    if (detailMenu == 0) {
-                        break;    //뒤로 가기
+                if (detailMenu == 0) {
+                    break;    //뒤로 가기
+                }
+                if (detailMenu >= 1 && detailMenu <= filtered.size()) { //입력값이 filtered 리스트의 size() 이내라면
+                    System.out.println("선택한 메뉴: " + filtered.get(detailMenu - 1));
+
+                    //장바구니 추가
+                    System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                    System.out.println("1. 확인 \t\t 2. 취소");
+                    int inputCart = sc.nextInt();
+
+                    if(inputCart == 2){ //취소
+                        continue;
                     }
-                    if (detailMenu >= 1 && detailMenu <= filtered.size()) { //입력값이 filtered 리스트의 size() 이내라면
-                        System.out.println("선택한 메뉴: " + filtered.get(detailMenu - 1));
 
-                        //장바구니 추가
-                        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
-                        System.out.println("1. 확인 \t\t 2. 취소");
-                        int inputCart = sc.nextInt();
+                    if(inputCart == 1) { //1. 확인하면 cart 리스트(장바구니)에 추가
+                        cart.addCart(filtered.get(detailMenu - 1));
+                        System.out.println(filtered.get(detailMenu - 1).getName() + " 이 장바구니에 추가되었습니다.");
+                    }
 
-                        if(1 == inputCart){
-                            cart.addCart(filtered.get(detailMenu - 1));     //1. 확인하면 cart 리스트(장바구니)에 추가
-                            System.out.println(filtered.get(detailMenu - 1).getName() + " 이 장바구니에 추가되었습니다.");
-                            
 
-                        } else if (2 == inputCart){
-                            break;
-                        } else {
-                            System.out.println("잘못 입력하셨습니다.");
+
+
+                    if(!cart.getCart().isEmpty()){  //장바구니가 비어있지 않다면
+                        //주문 기능
+                            System.out.println("[ ORDER MENU ]\n4. Orders\n5. Cancel "); //주문 기능 출력
+                            int ordersInput = sc.nextInt();
+                        while (true) {
+                            if (ordersInput == 4) {
+                                System.out.println("아래와 같이 주문하시겠습니까?");
+                                System.out.println("[ Orders ]\n" + filtered.get(detailMenu - 1) + "\n[ Total ]\nW " + filtered.get(detailMenu - 1).getPrice());
+                                System.out.println("1. 주문\t\t2. 메뉴판");
+
+                                sc.nextLine();
+                                int orderOrMenu = sc.nextInt();
+                                if (orderOrMenu == 1) {
+                                    System.out.println("주문이 완료되었습니다. 금액은 W " + filtered.get(detailMenu - 1).getPrice() + "입니다.");
+                                    return;
+                                } else if (orderOrMenu == 2) {
+                                    break;
+                                } else {
+                                    System.out.println("1 주문, 2 메뉴판만 가능합니다.");
+                                }
+                            } else if (ordersInput == 5) { //주문 취소
+                                break;
+                            } else {
+                                sc.nextLine();
+                                System.out.println("4 주문, 5 취소만 가능합니다.");
+                            }
                         }
-
-
-
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
                     }
-                } catch (InputMismatchException e){
-                    System.out.println("문자는 입력할 수 없습니다.");
-                    sc.nextLine();
+                    
+
+
+
+
+                } else {
+                    System.out.println("잘못 입력하셨습니다.");
                 }
+            } catch (InputMismatchException e){
+                System.out.println("문자는 입력할 수 없습니다.");
+                sc.nextLine();
             }
+
         }
     }
 }
