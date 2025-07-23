@@ -42,7 +42,7 @@ class MenuItem {
 
     @Override
     public String toString(){
-        return String.format("%-8s | %-15s | %-3.1f | %-50s", category, name, price, comment);
+        return String.format("%-8s | %-15s | W %-3.1f | %-50s", category, name, price, comment);
     }
 
 }

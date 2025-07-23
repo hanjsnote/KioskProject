@@ -1,27 +1,26 @@
-package Kiosk.assentialFunction.lv5;
+package Kiosk.challengeFunction.lv1;
+import java.util.Scanner;
 
-import java.util.*;
+//메뉴 수정, 삭제, 추가 기능을 수행하는 관리자 클래스
+public class Manager {
 
-class Menu {
+    Menu menu;
 
-    String strFormat = "%-15s | W %-3.1f | %-50s%n"; //간격 포맷
-    private List<MenuItem> menuItems = new ArrayList<>();
-
-    //Getter
-    List<MenuItem> getMenuItems(){
-        return menuItems;
+    Manager(Menu menu){     //Main에서 생성한 menu를 공유해서 사용
+        this.menu = menu;
     }
 
     Scanner sc = new Scanner(System.in);
 
     //메뉴 추가 기능
     void setMenuItems(){
+        System.out.println("Manager의 menu: " + System.identityHashCode(menu));
         while (true) {
-            System.out.println("번호  | Category |       Name      |Price|            Comment");
-            for(int i = 0; i < menuItems.size(); i++){  //현재 menuItems 리스트의 목록을 보여줌
-                MenuItem menuList = menuItems.get(i);
-                System.out.println("번호 " + (i + 1) + ", " + menuList);
-                }
+            System.out.println("번호  | Category |       Name      | Price |            Comment");
+            for(int i = 0; i < menu.getMenuItems().size(); i++){  //현재 menuItems 리스트의 목록을 보여줌
+                MenuItem menuList = menu.getMenuItems().get(i);
+                System.out.println("번호 " + (i + 1) + "| " + menuList);
+            }
 
             System.out.print("메뉴를 추가하시겠습니까? 또는 수정하시겠습니까?(추가 y, 수정 m, 뒤로가기 0): ");
             char addCh = sc.next().charAt(0);
@@ -46,9 +45,9 @@ class Menu {
                 System.out.print("comment를 입력해주세요 예) 맛있는 에그 버거: ");
                 String commentInput = sc.nextLine();
 
-                //MenuItem 객체 생성후 추가
+                //MenuItem 객체 생성후 addItem 호출하여 리스트에 메뉴 추가
                 MenuItem newItem = new MenuItem(categoryInput, nameInput, priceInput, commentInput);
-                addItem(newItem);
+                menu.addItem(newItem);
                 System.out.println("메뉴가 추가되었습니다.");
 
             } else if (addCh == 'm'){ // 메뉴 수정 기능
@@ -61,8 +60,8 @@ class Menu {
                 }
 
                 //Setter
-                if (modifyMenuNum >= 1 && modifyMenuNum <= menuItems.size()) { //입력값이 리스트 인덱스의 유효 범위인지 확인
-                    MenuItem selectedItem = menuItems.get(modifyMenuNum - 1);
+                if (modifyMenuNum >= 1 && modifyMenuNum <= menu.getMenuItems().size()) { //입력값이 리스트 인덱스의 유효 범위인지 확인
+                    MenuItem selectedItem = menu.getMenuItems().get(modifyMenuNum - 1);
 
                     System.out.print("선택하신 메뉴는: " + selectedItem + "입니다 수정하시겠습니까? (y/n) 또는 삭제는 x: ");
                     char ch = sc.next().charAt(0);
@@ -92,7 +91,7 @@ class Menu {
                     } else if (ch == 'n') { //'n' 입력시 뒤로가기
                         break;
                     } else if (ch == 'x') { //'x' 입력시 해당 아이템 삭제
-                        removeItem(modifyMenuNum);
+                        menu.removeItem(modifyMenuNum);
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
                     }
@@ -101,66 +100,6 @@ class Menu {
                 }
             }
         }
-    }
-
-    //List에 들어있는 MenuItem을 순차적으로 보여주는 함수
-    // 1.Burgers 메뉴 선택시 해당 목록만 출력
-    void burgers() {
-        System.out.println("[ BURGERS MENU ]");
-
-        for (MenuItem berger : menuItems) {
-            if (berger.getCategory().equals("Burgers")){
-                System.out.printf(strFormat, berger.getName(), berger.getPrice(), berger.getComment());
-            }
-        }
-        System.out.println("0. 뒤로가기");
-    }
-
-    // 2.Drink 메뉴 선택시 해당 목록만 출력
-    void drink(){
-        System.out.println("[ DRINK MENU ]");
-
-        for (MenuItem drink : menuItems){
-            if (drink.getCategory().equals("Drinks")){
-                System.out.printf(strFormat, drink.getName(), drink.getPrice(), drink.getComment());
-            }
-        }
-        System.out.println("0. 뒤로가기");
-    }
-
-    // 3.Desserts 메뉴 선택시 해당 목록만 출력
-    void desserts(){
-        System.out.println("[ DESSERTS MENU ]");
-
-        for (MenuItem desserts : menuItems){
-            if (desserts.getCategory().equals("Desserts")){
-                System.out.printf(strFormat, desserts.getName(), desserts.getPrice(), desserts.getComment());
-            }
-        }
-        System.out.println("0. 뒤로가기");
-    }
-
-    //add 메서드
-    public void addItem(MenuItem me){
-        menuItems.add(me);
-    }
-
-    //삭제 메서드
-    public void removeItem(int modifyIndex){
-        menuItems.remove(modifyIndex - 1);
-        System.out.println("삭제되었습니다.");
-    }
-
-    //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
-    List<MenuItem> filteredItem(String category) {
-        List<MenuItem> filterList = new ArrayList<>();
-
-        for (MenuItem item : getMenuItems()) {
-            if (item.getCategory().equals(category)) {
-                filterList.add(item);
-            }
-        }
-        return filterList;
     }
 
     //눈가림용 암호화..

@@ -5,16 +5,20 @@ import java.util.*;
 class Kiosk {
 
     private final Menu menu;
-    Cart cart = new Cart();
+    private final Manager manager;
 
-    Kiosk(Menu menu){
+    Cart cart = new Cart(); //장바구니 객체
+
+    Kiosk (Menu menu) {
         this.menu = menu;
+        this.manager = new Manager(menu);   //Manager 클래스에 같은 menu 객체를 넘김
     }
 
     List<MenuItem> filtered = new ArrayList<>(); //start 함수에서 사용할 List
 
     //입력과 반복문 로직 start()함수
     public void start() {
+        System.out.println("Kiosk의 menu: " + System.identityHashCode(menu));
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -29,8 +33,8 @@ class Kiosk {
 
                         String pw = sc.nextLine();
 
-                        if (menu.passWord().equals(pw)) { //passWord 메서드에 정의된 비밀번호가 입력값과 같으면
-                            menu.setMenuItems();          //수정기능 메서드 호출
+                        if (manager.passWord().equals(pw)) { //passWord 메서드에 정의된 비밀번호가 입력값과 같으면
+                            manager.setMenuItems();          //수정기능 메서드 호출
                         } else if (pw.equals("0")) {      //뒤로 가기
                             break;
                         } else {
@@ -38,7 +42,7 @@ class Kiosk {
                         }
                     }
 
-                } else if (userMode == 2) { //사용자 메뉴로 넘어감
+                } else if (userMode == 2) { //사용자 메뉴
                     break;
                 } else {
                     System.out.println("잘못된 입력입니다.");
@@ -117,8 +121,8 @@ class Kiosk {
                     }
                 } else if (selectMenu == 4 || selectMenu == 5 && cart.getCart().isEmpty()){ //장바구니 목록이 없을때 4, 5를 입력하면
                     try {
-                        menu.nullCart();
-                    } catch (Menu.NullCartException e){
+                        cart.nullCart();
+                    } catch (Cart.NullCartException e){
                         System.out.println("장바구니가 비어있습니다");
                         continue;
                     }
