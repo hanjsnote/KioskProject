@@ -1,4 +1,5 @@
-package Kiosk.challengeFunction.lv2;
+package Kiosk.challengeFunction.lv1;
+
 import java.util.Scanner;
 
 //메뉴 수정, 삭제, 추가 기능을 수행하는 관리자 클래스
