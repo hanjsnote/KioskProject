@@ -5,7 +5,7 @@ import java.util.*;
 class Menu {
 
     String strFormat = "%-15s | %-3.1f | %-50s%n"; //간격 포맷
-    private List<MenuItem> menuItems = new ArrayList<>();
+    private final List<MenuItem> menuItems = new ArrayList<>();
 
     //Getter
     List<MenuItem> getMenuItems(){
@@ -151,7 +151,7 @@ class Menu {
         System.out.println("삭제되었습니다.");
     }
 
-    //Main메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
+    //Main 메뉴에서 사용자 입력에 따라 카테고리별로 새로운 List에 담을 메서드
     List<MenuItem> filteredItem(String category) {
         List<MenuItem> filterList = new ArrayList<>();
 
@@ -173,6 +173,13 @@ class Menu {
         return sb.toString();
     }
 
-
-
+    void nullCart(){
+        throw new NullCartException("장바구니가 비어있습니다.");
+    }
+    //장바구니가 비었을시 4, 5를 입력하면 RuntimeException 발생
+    class NullCartException extends RuntimeException {
+        NullCartException(String message){
+            super(message);
+        }
+    }
 }

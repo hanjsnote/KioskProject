@@ -1,7 +1,5 @@
 package Kiosk.challengeFunction.lv1;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.*;
 
 class Kiosk {
@@ -11,11 +9,11 @@ class Kiosk {
 
     Kiosk(Menu menu){
         this.menu = menu;
-    };
+    }
 
     List<MenuItem> filtered = new ArrayList<>(); //start 함수에서 사용할 List
 
-    //입력과 반복문 로직 start함수
+    //입력과 반복문 로직 start()함수
     public void start() {
         Scanner sc = new Scanner(System.in);
 
@@ -70,7 +68,7 @@ class Kiosk {
                 }
 
                 if (selectMenu == 1) {              //사용자 입력값이 1이라면
-                    menu.burgers();                 //Menu 클래스의 bergers() 메서드를 호출하여 해당 메뉴 목록을 출력하고
+                    menu.burgers();                 //Menu 클래스의 burgers() 메서드를 호출하여 해당 메뉴 목록을 출력하고
                     filtered = menu.filteredItem("Burgers"); // 메뉴 항목 중 "1. Burgers" 카테고리에 해당하는 항목만 필터링해서 filtered 리스트에 담는다.
 
                 } else if (selectMenu == 2) {
@@ -90,7 +88,7 @@ class Kiosk {
                         System.out.println(cartItem);           //장바구니의 목록을 보여주고
                         totalPrice += cartItem.getPrice();      //장바구니에 담긴 메뉴의 가격을 합산
                     }
-                    System.out.println("[ Total ]\nW " + totalPrice + "\n1. 주문\t\t2. 메뉴판");
+                    System.out.println("[ Total ]\nW " + String.format("%.1f", totalPrice) + "\n1. 주문\t\t2. 메뉴판");
 
                     int orderOrMenu = sc.nextInt();
                     if(orderOrMenu == 1){
@@ -102,6 +100,7 @@ class Kiosk {
 
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
+                        continue;
                     }
                 } else if (selectMenu == 5 && !cart.getCart().isEmpty()){ //장바구니 비우기
                     System.out.println("장바구니를 비우시겠습니까? (y/n): ");
@@ -109,13 +108,20 @@ class Kiosk {
 
                     if(cleanCart == 'y'){ //y 를 누르면 장바구니 비우기
                         cart.removeCart();
+                        continue;
                     } else if (cleanCart == 'n'){
-                        break;
+                        continue;
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
+                        continue;
                     }
-                } else if (selectMenu == 4 || selectMenu == 5 && cart.getCart().isEmpty()){
-                    System.out.println("아따 장바구니가 비었당께롱");
+                } else if (selectMenu == 4 || selectMenu == 5 && cart.getCart().isEmpty()){ //장바구니 목록이 없을때 4, 5를 입력하면
+                    try {
+                        menu.nullCart();
+                    } catch (Menu.NullCartException e){
+                        System.out.println("장바구니가 비어있습니다");
+                        continue;
+                    }
                 } else {
                     System.out.println("잘못 입력하셨습니다.");
                 }
@@ -148,6 +154,8 @@ class Kiosk {
                     if(inputCart == 1) { //1. 확인하면 cart 리스트(장바구니)에 추가
                         cart.addCart(filtered.get(detailMenu - 1));
                         System.out.println(filtered.get(detailMenu - 1).getName() + " 이 장바구니에 추가되었습니다.");
+                    } else {
+                        System.out.println("잘못 입력하셨습니다.");
                     }
 
                 } else {
