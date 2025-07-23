@@ -97,35 +97,21 @@ class Kiosk {
 
                     int orderOrMenu = sc.nextInt();
 
-                    if(orderOrMenu == 1){
+                    if(orderOrMenu == 1){   //1. 주문시 할인율 목록 표시
                         System.out.println("할인 정보를 입력해주세요.");
-                        System.out.println("1. 국가유공자 : 10%\n2. 군인    : 5%\n3. 학생     : 3%\n일반     : 0%");
+                        System.out.println("1. 국가유공자 : 10%\n2. 군인    : 5%\n3. 학생     : 3%\n4. 일반     : 0%");
+
+                        sc.nextLine();
                         int customersInput = sc.nextInt();
 
-//                        if(customersInput == 1){
-//                            customerType.customer(customersInput, totalPrice);
-//                        } else if (customersInput == 2){
-//                            customerType.customer(customersInput, totalPrice);
-//                        } else if (customersInput == 3){
-//                            customerType.customer(customersInput, totalPrice);
-//                        }
-
-
-
-
-//                        if(customersInput == 1){
-//                            System.out.println("주문이 완료되었습니다. 금액은 W " + totalPrice + "입니다.");
-//                            cart.removeCart();
-//                            continue;
-//                        } else if (customersInput == 2){
-//                            continue;
-//
-//                        } else {
-//                            System.out.println("잘못 입력하셨습니다.");
-//                            continue;
-//                        }
-
-
+                        if(customersInput >= 1 && customersInput <= 4){
+                            customerType.discount(customersInput, totalPrice);
+                            System.out.println("주문이 완료되었습니다. 금액은 W " + String.format("%.1f", customerType.discountAmount) + " 입니다.\n");
+                            cart.removeCart();
+                            continue;
+                        } else {
+                            System.out.println("잘못 입력하셨습니다.");
+                        }
 
                     } else if (orderOrMenu == 2){
                         continue;
