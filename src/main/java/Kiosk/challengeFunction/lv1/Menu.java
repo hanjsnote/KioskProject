@@ -12,8 +12,6 @@ class Menu {
         return menuItems;
     }
 
-    Scanner sc = new Scanner(System.in);
-
 
     //List에 들어있는 MenuItem을 순차적으로 보여주는 함수
     // 1.Burgers 메뉴 선택시 해당 목록만 출력

@@ -2,7 +2,7 @@ package Kiosk.assentialFunction.lv5;
 
 class MenuItem {
     //필드 인스턴스 변수
-    private String category;
+    private final String category;
     private String name;
     private double price;
     private String comment;
