@@ -2,7 +2,7 @@ package Kiosk.assentialFunction.lv5;
 
 class MenuItem {
     //필드 인스턴스 변수
-    private String category;
+    private final String category;
     private String name;
     private double price;
     private String comment;
@@ -43,7 +43,7 @@ class MenuItem {
 
     @Override
     public String toString(){
-        return String.format("%-8s | %-15s | %-3.1f | %-50s", category, name, price, comment);
+        return String.format("%-8s | W %-15s | %-3.1f | %-50s", category, name, price, comment);
     }
 
 }

@@ -1,4 +1,4 @@
-package Kiosk.challengeFunction.lv1;
+package Kiosk.challengeFunction.lv2;
 
 import java.util.*;
 

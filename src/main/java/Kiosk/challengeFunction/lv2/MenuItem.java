@@ -1,4 +1,4 @@
-package Kiosk.challengeFunction.lv1;
+package Kiosk.challengeFunction.lv2;
 
 class MenuItem {
     //필드 인스턴스 변수

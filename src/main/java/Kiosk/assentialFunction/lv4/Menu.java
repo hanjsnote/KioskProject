@@ -4,7 +4,7 @@ import java.util.*;
 
 class Menu {
 
-    String strFormat = "%-15s | %-3.1f | %-50s%n"; //간격 포맷
+    String strFormat = "%-15s | W %-3.1f | %-50s%n"; //간격 포맷
     List<MenuItem> menuItems = new ArrayList<>();
 
     //List에 들어있는 MenuItem을 순차적으로 보여주는 함수

@@ -1,4 +1,4 @@
-package Kiosk.challengeFunction.lv1;
+package Kiosk.challengeFunction.lv2;
 
 import java.util.*;
 
@@ -7,7 +7,8 @@ class Kiosk {
     private final Menu menu;
     private final Manager manager;
 
-    Cart cart = new Cart(); //장바구니 객체
+    Cart cart = new Cart(); //장바구니 인스턴스
+    CustomerType customerType = new CustomerType(); //고객 인스턴스
 
     Kiosk (Menu menu) {
         this.menu = menu;
@@ -95,17 +96,46 @@ class Kiosk {
                     System.out.println("[ Total ]\nW " + String.format("%.1f", totalPrice) + "\n1. 주문\t\t2. 메뉴판");
 
                     int orderOrMenu = sc.nextInt();
+
                     if(orderOrMenu == 1){
-                        System.out.println("주문이 완료되었습니다. 금액은 W " + totalPrice + "입니다.");
-                        cart.removeCart();
-                        continue;
+                        System.out.println("할인 정보를 입력해주세요.");
+                        System.out.println("1. 국가유공자 : 10%\n2. 군인    : 5%\n3. 학생     : 3%\n일반     : 0%");
+                        int customersInput = sc.nextInt();
+
+//                        if(customersInput == 1){
+//                            customerType.customer(customersInput, totalPrice);
+//                        } else if (customersInput == 2){
+//                            customerType.customer(customersInput, totalPrice);
+//                        } else if (customersInput == 3){
+//                            customerType.customer(customersInput, totalPrice);
+//                        }
+
+
+
+
+//                        if(customersInput == 1){
+//                            System.out.println("주문이 완료되었습니다. 금액은 W " + totalPrice + "입니다.");
+//                            cart.removeCart();
+//                            continue;
+//                        } else if (customersInput == 2){
+//                            continue;
+//
+//                        } else {
+//                            System.out.println("잘못 입력하셨습니다.");
+//                            continue;
+//                        }
+
+
+
                     } else if (orderOrMenu == 2){
                         continue;
-
                     } else {
                         System.out.println("잘못 입력하셨습니다.");
                         continue;
                     }
+
+
+
                 } else if (selectMenu == 5 && !cart.getCart().isEmpty()){ //장바구니 비우기
                     System.out.println("장바구니를 비우시겠습니까? (y/n): ");
                     char cleanCart = sc.next().charAt(0);
