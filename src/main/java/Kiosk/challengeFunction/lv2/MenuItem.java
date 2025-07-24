@@ -2,10 +2,10 @@ package Kiosk.challengeFunction.lv2;
 
 class MenuItem {
     //필드 인스턴스 변수
-    private final String category;
-    private String name;
-    private double price;
-    private String comment;
+    private final String category; //메뉴 각각의 카테고리
+    private String name;           //메뉴 이름
+    private double price;          //메뉴 가격
+    private String comment;        //메뉴 설명
 
     //생성자
     public MenuItem(String category, String name, double price, String comment){

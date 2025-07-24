@@ -1,25 +1,22 @@
 package Kiosk.challengeFunction.lv2;
 
 public class CustomerType {
-//ENUM!
+            //ENUM!
     enum Customer{
         NATIONAL(0.1), SOLDIER(0.05), STUDENT(0.03), PERSON(0);
 
-    private final double doubleChange;
+        final double customer;  //NATIONAL, SOLDIER 상수를 double 타입으로 변환
 
-    Customer(double doubleChange) {
-        this.doubleChange = doubleChange;
+        Customer(double customer) {
+            this.customer = customer;
+        }
     }
 
-    public double getDoubleChange(){
-        return doubleChange;
+    double discountAmount = 0;
+    public void discount (int customersInput, double totalPrice) {
+
+        if(customersInput >= 1 && customersInput <= 4){ //values()[]는 enum 값을 배열로 리턴
+            discountAmount = totalPrice - (totalPrice * Customer.values()[customersInput - 1].customer);
+        }
     }
-}
-//    public double discountAmount (int customersInput, double totalPrice){
-//        if(customersInput == 1){
-////            return totalPrice - (g * totalPrice);
-//        }
-//    }
-
-
 }
