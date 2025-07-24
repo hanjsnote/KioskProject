@@ -135,7 +135,7 @@ class Kiosk {
                         System.out.println("잘못 입력하셨습니다.");
                         continue;
                     }
-                } else if (selectMenu == 4 || selectMenu == 5 && cart.getCart().isEmpty()){ //장바구니 목록이 없을때 4, 5를 입력하면
+                } else if (selectMenu == 4 || selectMenu == 5 && cart.getCart().isEmpty()){ //장바구니 목록이 없을때 4, 5를 입력하면 예외 발생
                     try {
                         cart.nullCart();
                     } catch (Cart.NullCartException e){
@@ -144,6 +144,7 @@ class Kiosk {
                     }
                 } else {
                     System.out.println("잘못 입력하셨습니다.");
+                    continue;
                 }
             } catch (InputMismatchException e){
                 System.out.println("문자는 입력할 수 없습니다.");

@@ -5,7 +5,7 @@ public class CustomerType {
     enum Customer{
         NATIONAL(0.1), SOLDIER(0.05), STUDENT(0.03), PERSON(0);
 
-        final double customer;  //NATIONAL, SOLDIER... 상수를 double 타입으로 변환
+        final double customer;  //NATIONAL, SOLDIER 상수를 double 타입으로 변환
 
         Customer(double customer) {
             this.customer = customer;
